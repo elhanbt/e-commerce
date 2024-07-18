@@ -246,5 +246,4 @@ def addDefaultAddress(request):
     if not address:
         addresses.isDefault = True
         addresses.save()
-    else:
-        print('hii')
+    
