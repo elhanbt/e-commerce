@@ -1,0 +1,116 @@
+@font-face{
+    font-family: "Montserrat-regular";
+    src: url("Assets/fonts/woff_woff2/Montserrat-Regular.woff") format('woff'),
+    url("Assets/fonts/woff_woff2/Montserrat-Regular.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Montserrat-semibold";
+    src: url("Assets/fonts/woff_woff2/Montserrat-SemiBold.woff") format('woff'),
+    url("Assets/fonts/woff_woff2/Montserrat-SemiBold.woff2") format('woff2');
+}
+@font-face{
+    font-family: "Montserrat-medium";
+    src: url("Assets/fonts/woff_woff2/Montserrat-Medium.woff") format('woff'),
+    url("Assets/fonts/woff_woff2/Montserrat-Medium.woff2") format('woff2');
+}
+
+
+.wrapper{
+    
+    align-items: center;
+    font-family: 'Montserrat-regular';
+    
+}
+
+
+img{
+    display: block;
+    width: 100%;
+}
+div.cart{
+    width: 60%;
+}
+div.signin_box{
+    width: 60%;
+    box-shadow: 0px 8px 40px 0px #0000001A;
+    border: #EDEDED solid 1px;
+    border-radius: 15px;
+    padding: 20% 15%;
+}
+label{
+    display: inline-block;
+    color: #7B7B75;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+input{
+    border-radius: 10px;
+    border: solid #DFDFD6 1px;
+    padding: 20px 10px;
+    background-color: inherit;
+    font-size: 9pt;
+    width:0;
+}
+.iti{
+    display: block !important;
+}
+.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag{
+    background-color:inherit !important;
+}
+.iti--separate-dial-code .iti__selected-flag {
+    background-color: white !important;
+    font-family: 'Montserrat-medium';
+}
+.iti__selected-flag{
+    margin-left: 5px;
+}
+::placeholder{
+    color: #BABABA;
+    font-family: 'Montserrat-regular';
+}
+input:focus{
+    outline: none;
+}
+.iti--separate-dial-code .iti__selected-dial-code {
+    font-size: 10pt;
+    font-family: 'Montserrat-medium';
+}
+#submit{
+    width: 100%;
+    margin-top: 60px;
+    background-color: #7B7B75;
+    color: white;
+    font-family: 'Montserrat-semibold';
+    font-size: 13pt;
+    cursor: pointer;
+}
+
+div.terms{
+    font-size: 8pt;
+    color: #B5B5B5;
+    margin-top: 10px;
+}
+div.terms > a{
+    color: #B5B5B5;
+}
+.error{
+    margin-top: 20px;
+    color: red;
+    font-size: 10pt;
+    display: block;
+}
+
+@media screen and (max-width:1024px ) {
+    .cart{display: none;}
+    .signin_box{margin: 0 auto;}
+    .wrapper{padding: 100px 0;}
+    #phone_num{display: none;}
+    #phone{width: 100%; font-family: 'montserrat-medium';}
+    #mobile{display: block !important;gap: 0px;}
+}
+@media screen and (min-width:1024px){
+    .wrapper{gap: 60px; padding: 50px 15%; display: flex}
+    #mobile{display: flex !important;gap: 10px;}   
+}

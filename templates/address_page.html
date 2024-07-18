@@ -1,0 +1,338 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Address</title>
+    <link rel="icon" href="{% static '/imgs/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/address_style.css' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <style>
+        @font-face{
+            font-family: "Montserrat-semibold";
+            src: url("{% static '/fonts/Montserrat-SemiBold.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-SemiBold.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: "Montserrat-medium";
+            src: url("{% static '/fonts/Montserrat-Medium.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-Medium.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: 'Montserrat-regular';
+            src: url("{% static '/fonts/Montserrat-Regular.woff' %}"), format('woff'),
+            url("{% static '/fonts/Montserrat-Regular.woff2' %}"), format('woff2')
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        
+        <div id="dropdownwrapper">
+
+            <div class="dropdown2" id="drop2">
+                <a href="">
+                    <span><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></span>
+                    Wishlist
+                </a>
+                <a href="">
+                    <span><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></span>
+                    Cart
+                </a>
+                <a style="align-items: center;" onclick="dropdown('1')">
+                    <span><img src="{% static '/imgs/account.svg' %}" alt="account icon"></span>
+                    {{request.user.first_name}}
+                    <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+                </a >
+            </div>
+    
+
+            <div class="dropdown" id="drop1">
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/account.svg' %}" alt="accounticon"></span> <span> Profile</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/truck_icon.svg' %}" alt="truck icon"></span> <span> My address</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/cart.svg' %}" alt="acart icon"></span> <span> My orders</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/notification_icon.svg' %}" alt="notification icon"></span> <span>Notification</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href="{% url 'login' %}"  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/logout_icon.svg' %}" alt="logout icon"></span> <span>Logout</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+            </div>
+
+            <!-- form for adding new address -->
+            <div id="add_address_modal" class="address_modal">
+                <div style="color:#2D2D2C; font-size:17pt;font-family:'Montserrat-medium';margin-bottom:30px">Create new address</div>
+                <form action="" method="post" id="form">
+                {% csrf_token %}
+                
+                <section>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter name">
+                    </div>
+    
+                    <div>
+                        <label for="name">Mobile number</label>
+                        <input type="tel" name="phone" id="phone" placeholder="Enter mobile number" maxlength="10">
+                    </div>
+                </section>
+                
+                <label for="address">Address</label>
+                <textarea name="address" id="address" placeholder="Enter address"></textarea>
+
+                <section style="margin-top: 10px;">
+                    <div>
+                        <label for="pin">Pin code</label>
+                        <input type="text" name="pin" id="pin" maxlength="6" placeholder="Enter pin code">
+                    </div>
+
+                    <div>
+                        <label for="city">Town/City</label>
+                        <input type="text" name="city" id="city" placeholder="Enter town/city">
+                    </div>
+
+                    <div>
+                        <label for="city">State</label>
+                        <input type="text" name="state" id="state" placeholder="Enter state">
+                    </div>
+                    
+                    <div>
+                        <label for="district">District</label>
+                        <input type="text" name="district" id="district" placeholder="Enter district">
+                    </div>
+
+                    <div>
+                        <label for="landmark">Landmark</label>
+                        <input type="text" name="landmark" id="landmark" placeholder="Enter landmark">
+                    </div>
+
+                    <div>
+                        <label>Address type</label>
+                        <span class="radio"><input type="radio" name="type" value="home" checked> Home</span>
+                        <span class="radio"><input type="radio" name="type" value="office"> Office</span>
+                        <span class="radio"><input type="radio" name="type" value="other"> Other</span>
+                    </div>
+
+                </section>
+
+                <div class="buttons">
+                    <div class="cancel" onclick="closeModals()">Cancel</div>
+                    <button type="submit" style="background-color: #FFD700;" disabled id="save">Save</button>
+                </div>
+
+                </form>
+            </div>
+            
+            <!-- modal for deleting -->
+            <div id="delete_modal">
+                <div style="color: #2D2D2C; font-family:'Montserrat-medium'; font-size:17pt">Delete address</div>
+                <div style="color:#7B7B75; font-size:14pt; margin-top:20px">Are you sure want to delete this address?</div>
+                <div style="margin-top: 30px;text-align:right">
+                    <button id="cancel_button" onclick="closeModals()">Cancel</button>  
+                    <a href="" id="remove_button">Delete</a>
+                </div>
+            </div>
+
+            <!-- modals for editing address -->
+            <div id="form_container">
+            {% for i in address %}
+            <div id="edit_address_modal_{{i.id}}" class="address_modal">
+                <div style="color:#2D2D2C; font-size:17pt;font-family:'Montserrat-medium';margin-bottom:30px">Create new address</div>
+                <form action="" method="post" id="form">
+                {% csrf_token %}
+                
+                <section>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter name" value="{{i.name}}">
+                    </div>
+    
+                    <div>
+                        <label for="name">Mobile number</label>
+                        <input type="tel" name="phone" id="phone" placeholder="Enter mobile number" maxlength="10" value="{{i.phone}}">
+                    </div>
+                </section>
+                
+                <label for="address">Address</label>
+                <textarea name="address" id="address" placeholder="Enter address">{{i.address}}</textarea>
+
+                <section style="margin-top: 10px;">
+                    <div>
+                        <label for="pin">Pin code</label>
+                        <input type="text" name="pin" id="pin" maxlength="6" placeholder="Enter pin code" value="{{i.pin_code}}">
+                    </div>
+
+                    <div>
+                        <label for="city">Town/City</label>
+                        <input type="text" name="city" id="city" placeholder="Enter town/city" value="{{i.city}}">
+                    </div>
+
+                    <div>
+                        <label for="state">State</label>
+                        <input type="text" name="state" id="state" placeholder="Enter state" value="{{i.state}}">
+                    </div>
+                    
+                    <div>
+                        <label for="district">District</label>
+                        <input type="text" name="district" id="district" placeholder="Enter district" value="{{i.district}}">
+                    </div>
+
+                    <div>
+                        <label for="landmark">Landmark</label>
+                        <input type="text" name="landmark" id="landmark" placeholder="Enter landmark" value="{{i.landmark}}">
+                    </div>
+
+                    <div>
+                        <label>Address type</label>
+                        <span class="radio"><input type="radio" name="type" value="home"> Home</span>
+                        <span class="radio"><input type="radio" name="type" value="office"> Office</span>
+                        <span class="radio"><input type="radio" name="type" value="other"> Other</span>
+                    </div>
+
+                </section>
+
+                <div class="buttons">
+                    <div class="cancel" onclick="closeModals()">Cancel</div>
+                    <button type="submit" style="background-color: #FFD700;" id="save">Save</button>
+                </div>
+
+                </form>
+            </div>
+            {% endfor %}
+            </div>
+
+        </div>
+
+
+        <div class="header">
+            
+        <!--header left part-->
+        <div class="logo_searchbar">
+            <h1><a href="{% url 'index' %}"><img src="{% static '/imgs/logo.svg' %}" alt="logo"/></a></h1>        <!--LOGO-->
+            <div class="search">
+                <span><img src="{% static '/imgs/search.svg' %}" alt="search icon"/></span>
+                <input type="text" name="search" placeholder="Search products">
+            </div>
+        </div>
+
+        <!--header right part-->
+        <div class="links">
+            <div>
+                <a href="{% url 'wishlist' %}"><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></a>
+               
+            
+            
+                <a href="{% url 'cart' %}"><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></a>
+               
+            </div>
+            <div style="align-items: center;" onclick="dropdown('1')">
+                <a><img src="{% static '/imgs/account.svg' %}" alt="account icon"></a>
+                {{request.user.first_name}}
+                <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+            </div>
+
+        </div>
+        <!-- menu for mobile view -->
+        <div class="menu" onclick="dropdown('2')" id="menu">
+            <img src="{% static '/imgs/menu.svg' %}" alt="menu button"/>
+        </div>
+        </div>
+        <!-- main section -->
+        <div class="section_wrapper">
+            <div class="left_column">
+                <div class="account">
+                    <div><img src="{% static '/imgs/avatar.png' %}" alt="profile pic"></div>
+                    <div style="display: flex;flex-direction:column;justify-content:center;"><span style="color: #7B7B75; font-size:11pt;">Hello</span>  <span style="color:#41413F;font-size:14pt;">{{request.user.first_name}} {{request.user.last_name}}</span> </div>
+                </div>
+                <a href="" class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/truck_icon.svg' %}" alt="truck icon"></span> <span> My address</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+                <a href="" class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/cart.svg' %}" alt="acart icon"></span> <span> My orders</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+                <a href="" class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/notification_icon.svg' %}" alt="notification icon"></span> <span>Notification</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+                <a href="" class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/logout_icon.svg' %}" alt="logout icon"></span> <span>Logout</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+            </div>
+
+            <div class="right_column">
+                <a class="heading_and_button">
+                    <div style="font-size:15pt; color:#2D2D2C; font-family:'Montserrat-medium';">My Address</div>
+                    <div class="add_address" onclick="addAddress()">
+                        <span><img src="{% static '/imgs/plus_icon.svg' %}" alt="plus icon"></span>
+                        <span>Add new address</span>
+                    </div>
+                </a>
+                <!-- addresses -->
+                <div class="addresses">
+                    {% for i in address %}
+                    <div class="address_box">
+                        <div class="name_and_type">
+                            <span class="name">{{i.name}}</span> <span class="type">{{i.type}}</span>
+                        </div>
+                        <div class="phone_no">+91 {{i.phone}}</div>
+                        <div class="address_lines">{{i.address}},</div>
+                        <div class="address_lines">{{i.landmark}},</div>
+                        <div class="address_lines" style="margin-bottom: 20px;">{{i.district}}, {{i.state}}, {{i.pin_code}}</div>
+
+                        <div class="buttons2">
+                            <div onclick="editAddress('{{i.id}}', '{{i.type}}')">Edit</div> <div class="delete" onclick="addURL('{{i.id}}')">Delete</div>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="{% static '/js/address_script.js' %}"></script>
+<script>
+    
+    var remove_button = document.getElementById('remove_button') 
+
+    function addURL(id){
+        var url = "{% url 'delete_address' 'placeholder' %}".replace('placeholder', String(id));
+        remove_button.href = url
+    }
+
+    function editAddress(id, type){
+        drop.style.display = 'block';
+        container.style.display = 'block'
+        var modal_id = "edit_address_modal_" + id
+        document.getElementById(modal_id).style.display = 'block';
+
+        var radio_button = document.querySelectorAll('.radio');
+        radio_button.forEach(element =>{
+            var button = element.firstChild;
+            if (button.value === type){
+                button.checked = true;
+            } 
+        }) 
+    }
+</script>
+
+</html>

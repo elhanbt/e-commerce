@@ -1,0 +1,121 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Verification</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/otp_style.css' %}"/>
+    <link rel="icon" href="{% static '/imgs/logo.svg' %}" type="image/x-icon"/>
+    
+    <style>
+        @font-face{
+        font-family: "Montserrat-semibold";
+        src: url("{% static '/fonts/Montserrat-SemiBold.woff' %}") format('woff'),
+        url("{% static '/fonts/Montserrat-SemiBold.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: "Montserrat-medium";
+            src: url("{% static '/fonts/Montserrat-Medium.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-Medium.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: 'Montserrat-regular';
+            src: url("{% static '/fonts/Montserrat-Regular.woff' %}"), format('woff'),
+            url("{% static '/fonts/Montserrat-Regular.woff2' %}"), format('woff2')
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div  class="cart"><img src="{% static '/imgs/shoppingcart.png' %}" alt="shopping cart"/></div>
+        <div class="otp_box">
+            <span style="color: #7B7B75;font-size: 12pt;">Enter otp</span>   
+                <form action="" method="post" id="form">
+                    {% csrf_token %}
+                    <span class="error">{{message}}</span>
+                <div id="inputcontainer">
+
+                    <input class="input" name="box1" type="text" placeholder="__" maxlength="1"/>
+
+                    <input class="input" name="box2" type="text" placeholder="__" maxlength="1"/>
+
+                    <input class="input" name="box3" type="text" placeholder="__"  maxlength="1"/>
+
+                    <input class="input" name="box4" type="text" placeholder="__" maxlength="1"/>
+                </div>
+                <span style="color: #BABABA; font-size: 10pt;">OTP will send to your registered mobile number</span>
+
+                <div style="margin-bottom: 10px;">
+                    <button type="submit" id="submit" disabled>Login</button>
+                </div>
+                <span style="font-size: 10pt;color: #7B7B75;">Didn't receive OTP? <a href="" style="text-decoration: none; color: #FFD700;">Resend</a></span>
+                </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    const inputs = document.getElementById('inputcontainer');
+    inputs.addEventListener('keyup',function(e){
+        const target = e.target;
+        const val = target.value;
+        if(isNaN(val)){
+            target.val = "";
+            return;
+        }
+        if(val != ""){
+            const next = target.nextElementSibling;
+            if(next){
+                next.focus();
+            }
+        }
+    });
+
+    inputs.addEventListener('keyup',function(e){
+        const target = e.target;
+        const key = e.key.toLowerCase();
+
+        if(key == 'backspace' || key == 'delete'){
+            target.value = "";
+            const previous = target.previousElementSibling;
+            if(previous){
+                previous.focus();
+            }
+        }
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('form');
+    const fields = form.querySelectorAll('input');
+    const submitBtn = document.getElementById('submit');
+    fields.forEach(number => {
+        number.addEventListener('input', validateForm);
+    });
+
+    function validateForm() {
+        let allFilled = true;
+
+        fields.forEach(number => {
+            if (number.value.trim() === '') {
+                allFilled = false;
+            }
+        });
+
+        if(!allFilled){
+            submitBtn.style.backgroundColor = '#7B7B75';
+            submitBtn.disabled = true;
+            submitBtn.style.color = 'white';
+        }
+        else{
+            submitBtn.style.backgroundColor = '#FFD900';
+            submitBtn.disabled = false;
+            submitBtn.style.color = '#4C4C4C';
+        }
+    }
+});
+
+    
+
+</script>
+</html>

@@ -1,0 +1,135 @@
+{% load static%}
+
+<html>
+<head>
+    <title>Sign in</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="{% static '/imgs/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/login_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    
+    <style>
+        @font-face{
+        font-family: "Montserrat-semibold";
+        src: url("{% static '/fonts/Montserrat-SemiBold.woff' %}") format('woff'),
+        url("{% static '/fonts/Montserrat-SemiBold.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: "Montserrat-medium";
+            src: url("{% static '/fonts/Montserrat-Medium.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-Medium.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: 'Montserrat-regular';
+            src: url("{% static '/fonts/Montserrat-Regular.woff' %}"), format('woff'),
+            url("{% static '/fonts/Montserrat-Regular.woff2' %}"), format('woff2')
+        }
+    </style>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div  class="cart"><img src="{% static '/imgs/shoppingcart.png' %}" alt="shopping cart"></div>
+        <div class="signin_box">
+            
+                <h1 style="width: 15%; margin: 0;"><a href="{% url 'login' %}"><img src="{% static '/imgs/logo.svg' %}" alt="logo"/></a></h1>
+                
+                <div style="color: #ffd900;font-size: 10pt;margin-top: 20px;">Welcome to Bycart</div>
+                
+                <div style="font-family: 'Montserrat-medium';color: #7B7B75;margin-top: 10px;font-size: 15pt;">Let's start to purchase with us</div>
+                {% csrf_token %}
+                <form action="{%url 'signin_otp'%}" method="post">
+                    <label for="phone">Mobile number</label>
+                                    
+                    <div id="mobile">
+                        <input type="text" name="phone" id="phone" placeholder="Enter mobile number">
+                        <input id="phone_num" type="tel" maxlength="10" placeholder="Enter mobile number" style="width: 80%; font-family: 'Montserrat-medium';">
+                    </div>
+
+                    <div style="text-align: center; font-size: 11pt; ">
+                        <input type="submit" id="submit" value="Get OTP" disabled>
+                        <div style="margin-top: 20px;">Already have an account? <a href="{%url 'login'%}" style="text-decoration: none; color:#ffd900 ;">Login</a></span>
+                        <div class="terms">By continuing, you agree to Buycart's <a href=""> Terms and conditions</a> and <a href="">Privacy policy</a></div>
+                    </div>
+                </form>
+
+
+        </div>
+    </div>
+</body>
+
+<script>
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      separateDialCode: true,
+      preferredCountries: ["in"],
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+
+
+    const phone = document.getElementById('phone_num');
+    phone.addEventListener('input',()=>{
+        const val = phone.value;
+        let submit = document.getElementById('submit');
+        if(val.length == 10){
+            submit.style.backgroundColor = '#FFD900';
+            submit.disabled = false;
+            submit.style.color = '#4C4C4C';
+            phone.blur();
+        }
+        else{
+            submit.style.backgroundColor = '#7B7B75';
+            submit.disabled = true;
+            submit.style.color = 'white';
+        }
+    })
+
+    phone.addEventListener('input', function(e) {
+    // Remove any non-numeric characters immediately
+    phone.value = phone.value.replace(/[^0-9]/g, '');
+
+    // Regular expression to match the phone number format
+    var code = /^([0-9]{3})([0-9]{3})([0-9]{4})$/;
+    var match = phone.value.match(code);
+    if (match) {
+        // Format the matched value
+        phone.value = `${match[1]} ${match[2]} ${match[3]}`;
+    } 
+});
+
+const phone2 = document.getElementById('phone');
+    phone2.addEventListener('input',()=>{
+        const val = phone2.value;
+        let submit = document.getElementById('submit');
+        if(val.length == 10){
+            submit.style.backgroundColor = '#FFD900';
+            submit.disabled = false;
+            submit.style.color = '#4C4C4C';
+            phone2.blur();
+        }
+        else{
+            submit.style.backgroundColor = '#7B7B75';
+            submit.disabled = true;
+            submit.style.color = 'white';
+        }
+    })
+
+    phone2.addEventListener('input', function(e) {
+    // Remove any non-numeric characters immediately
+    phone2.value = phone2.value.replace(/[^0-9]/g, '');
+
+    // Regular expression to match the phone2 number format
+    var code = /^([0-9]{3})([0-9]{3})([0-9]{4})$/;
+    var match = phone2.value.match(code);
+    if (match) {
+        // Format the matched value
+        phone2.value = `${match[1]} ${match[2]} ${match[3]}`;
+    } 
+});
+
+
+
+</script>
+
+</html>

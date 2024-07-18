@@ -1,0 +1,353 @@
+
+body{
+    margin: 0;
+    font-family: 'Montserrat-regular';
+   
+}
+img{
+    display: block;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+
+div.header{
+    display: flex;
+    padding: 20px 10% ;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background-color:#FFFFFFCC;
+    
+}
+div.section_wrapper{
+    padding: 25px 10%;
+    font-family: 'Montserrat-regular';
+    position: relative;
+}
+
+div.logo_searchbar{
+    display: flex;
+    gap:5%;
+    align-items: center;
+
+}
+div.logo_searchbar > h1{
+    margin: 0px;
+    width: 40px;
+}
+div.search{
+    border: solid 1px #f4e7e7;
+    display: flex;
+    padding: 2%;
+    border-radius: 10px;
+    width: 70%;
+    background-color: white;
+}
+
+div.search > span{
+    display: inline-block;
+    width: 25px;
+}
+div.search > input{
+    background-color: inherit;
+    border: none;
+    font-size: 13pt;
+    padding: 0px;
+    margin-left: 10px;
+    width: inherit;
+    
+}
+input:focus{
+    outline: none;
+}
+
+div.links{
+    gap: 25px;
+}
+div.links > div{
+    display: inline-flex;
+    font-size: 12pt;
+    color: #7B7B75;
+    cursor: pointer;
+    gap: 10px;
+}
+div.links > div > a{
+    width: 20px;
+}
+
+div.dropdown{
+    position: fixed;
+    right: 10%;
+    background-color: #FCFCFC;
+    border-radius: 15px;
+    padding: 20px;
+    display: none;
+}
+
+a.dropdown_content{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 0.5px #EDEDED;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 15px;
+    color: #7B7B75;
+    font-size: 11pt;
+}
+a.dropdown_content:hover{
+    background-color: #e3e3dc;
+}
+span.dropdown_icons{
+    width: 20px;
+    margin-right: 10px;
+}
+
+#dropdownwrapper{
+    position: fixed;
+    left: 0;
+    z-index: 5; 
+    background-color: #0000001A; 
+    width: 100%; 
+    height: 100%;
+    display: none;
+}
+.dropdown2{
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 10%;
+    background-color: #FCFCFC;
+    border-radius: 15px;
+    padding: 20px;
+}
+.dropdown2 > a{
+    display: flex;
+    border-bottom: solid 0.5px #EDEDED;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 15px;
+    color: #7B7B75;
+    font-size: 11pt;
+    
+}
+div.section_wrapper{
+    padding: 25px 10%;
+    font-family: 'Montserrat-regular';
+    display: flex;
+    justify-content: space-between;
+}
+.left_column{
+    width: 25%;
+}
+.account{
+    display: flex;
+    gap:15px;
+    font-family: 'Montserrat-medium';
+    border: solid 1px #EDEDED;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.right_column{
+    width:70%;
+}
+.heading_and_button{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+}
+.add_address{
+    display: flex;
+    color: #DAB803;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.address_modal{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+label{
+    display: block;
+    font-family: 'Montserrat-medium';
+    font-size: 14pt;
+    color: #41413F;
+    margin-bottom: 5px;
+}
+input{
+    border: solid 1px #EDEDED;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 12pt;
+    width: 100%;
+    font-family: 'Montserrat-regular'
+}
+::placeholder{
+    font-family: 'Montserrat-regular';
+}
+section{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+section > div{
+    flex: 0 0 49%;
+}
+textarea{
+    width: 99%;
+    border: 1px solid #EDEDED;
+    border-radius: 10px;
+    font-size: 12pt;
+    padding: 20px;
+    resize: none;
+    font-family: 'Montserrat-regular';
+}
+textarea:focus{
+    outline: none;
+}
+.radio{
+    color: #7B7B75;
+    margin-right: 20px;
+    font-size: 12pt;
+   transform: translateY(120%);
+   display: inline-block;
+}
+.radio > input{
+    width: fit-content;
+    margin: 0;
+    transform: translateY(15%);
+    accent-color: #B58500
+}
+.buttons{
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}
+button{
+    border: none;
+    padding: 10px 40px;
+    font-family: 'Montserrat-medium';
+    font-size: 13pt;
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.cancel{
+    border: solid 1px #DFDFD6;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 30px;
+    font-family: 'Montserrat-medium';
+    font-size: 13pt;
+}
+
+.addresses{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.address_box{
+    flex: 0 0 44%;
+    border:  solid 1px #DFDFD6;
+    border-radius: 10px;
+    padding: 20px;   
+}
+.name_and_type{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat-medium';
+    margin-bottom: 10px;
+}
+.name{
+    color: #41413F;
+    font-size: 15pt;
+}
+.type{
+    color: #DAB803;
+    font-size: 13pt;
+}
+.phone_no{
+    color: #7B7B75;
+    font-size: 12pt;
+    font-family: 'Montserrat-medium';
+    margin-bottom: 30px;
+}
+.address_lines{
+    color: #7B7B75;
+    font-size: 12pt;
+    margin-bottom: 5px;
+}
+.buttons2{
+    color: #B0B0B0;
+    display: flex;
+    gap: 10px;
+    font-size: 12pt;
+    font-family: 'Montserrat-medium';
+    
+}
+.buttons2 > div{
+    cursor: pointer;
+}
+
+#delete_modal{
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    
+}
+#cancel_button{
+    display: block;
+    border: solid 1px #DFDFD6;
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 5px;
+    color: #7B7B75;
+    font-size: 14pt;
+    font-family: 'Montserrat-medium';
+    width: auto;
+}
+#remove_button{
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 5px;
+    background-color: #FFD700;
+    color: #4C4C4C;
+    font-size: 14pt;
+    font-family: 'Montserrat-medium';
+}
+
+@media (max-width:1023px){
+    .links{display: none;}
+    .dropdown{width: fit-content;top: 15vw;}
+    .dropdown2{top:15vw}
+    .logo_searchbar{width: 100%;}
+    .header{padding:20px 10%;}
+}
+
+@media (min-width:1024px){
+    .links{display: flex;}
+    .logo_searchbar{width: 50%;}
+    .menu{display: none;}
+    .dropdown{width: 15%;top: 60px;}
+    .header{padding: 20px 10%;}
+}
+

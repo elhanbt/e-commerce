@@ -1,0 +1,284 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" href="{% static '/css/search_style.css' %}"/>
+    <link rel="icon" href="{% static '/imgs/logo.svg' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        @font-face{
+        font-family: "Montserrat-semibold";
+        src: url("{% static '/fonts/Montserrat-SemiBold.woff' %}") format('woff'),
+        url("{% static '/fonts/Montserrat-SemiBold.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: "Montserrat-medium";
+            src: url("{% static '/fonts/Montserrat-Medium.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-Medium.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: 'Montserrat-regular';
+            src: url("{% static '/fonts/Montserrat-Regular.woff' %}"), format('woff'),
+            url("{% static '/fonts/Montserrat-Regular.woff2' %}"), format('woff2')
+        }
+    </style>
+
+<script>
+    var down_arrow = "{% static '/imgs/downarrow.svg' %}";
+    var up_arrow = "{% static '/imgs/uparrow.svg' %}";
+    var like_active = "{% static '/imgs/like_active.svg' %}";
+    var like_inactive = "{% static '/imgs/like_inactive.svg' %}";
+    var close = "{% static '/imgs/close.svg' %}"
+    var wishlist = {{onwishlist}};
+    var category;
+</script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div id="dropdownwrapper">
+        
+            <div class="dropdown2" id="drop2">
+                <a href="{% url 'wishlist' %}">
+                    <span><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></span>
+                    Wishlist
+                </a>
+                <a href="{% url 'cart' %}">
+                    <span><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></span>
+                    Cart
+                </a>
+                <a style="align-items: center;" onclick="dropdown('1')">
+                    <span><img src="{% static '/imgs/account.svg' %}" alt="account icon"></span>
+                    {{request.user.first_name}}
+                    <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+                </a >
+            </div>
+    
+    
+            <div class="dropdown" id="drop1">
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/account.svg' %}" alt="accounticon"></span> <span> Profile</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/truck_icon.svg' %}" alt="truck icon"></span> <span> My address</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/cart.svg' %}" alt="acart icon"></span> <span> My orders</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/notification_icon.svg' %}" alt="notification icon"></span> <span>Notification</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href="{% url 'login' %}"  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/logout_icon.svg' %}" alt="logout icon"></span> <span>Logout</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+            </div>
+        </div>
+         <!--Header-->
+         <div class="header">
+                
+            <!--header left part-->
+            <div class="logo_searchbar">
+                <h1><a href="{% url 'index' %}"><img src="{% static '/imgs/logo.svg' %}" alt="logo"/></a></h1>        <!--LOGO-->
+                <div class="search">
+                    <span style="cursor: pointer;" onclick="search()"><img src="{% static '/imgs/search.svg' %}" alt="search icon"/></span>
+                    <input type="text" name="search" id="search" placeholder="Search products">
+                </div>
+            </div>
+    
+            <!--header right part-->
+            <div class="links">
+                <a href="{% url 'wishlist' %}">
+                    <span><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></span>
+                    Wishlist
+                </a>
+                <a href="{% url 'cart' %}">
+                    <span><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></span>
+                    Cart
+                </a>
+                <a onclick="dropdown('1')" style="align-items: center;">
+                    <span><img src="{% static '/imgs/account.svg' %}" alt="account icon"></span>
+                    {{request.user.first_name}}
+                    <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+                </a >
+            </div>
+            
+            <div class="menu" onclick="dropdown('2')" id="menu">
+                <img src="{% static '/imgs/menu.svg' %}" alt="menu button"/>
+            </div>
+    
+        </div>
+
+        <div class="section_wrapper">
+            <!--Heading-->
+            <div id="headandsort">
+                <span id="showresult" style="color: #2D2D2C;font-family: 'Montserrat-medium';">Showing results for {{item}} <span style="color:#7B7B75; font-size: smaller;font-family: 'Montserrat-regular';">({{count}} results found)</span></span>
+                <div style="position: relative;">
+                    <div class="sortbox"><!--Sort options-->
+                        <span style="color:#7B7B75">Sort by: </span> 
+                        <span id="option"> Relevance</span> 
+                        <span style="cursor: pointer;"><img src="{% static '/imgs/downarrow.svg' %}" alt="arrow" id="arrow"></span>
+                    </div>
+                    <div id="dropoptions">
+                        <div style="border-top-left-radius: 10px;border-top-right-radius: 10px;">Relevance</div>
+                        <div>New arivals</div>
+                        <div>Price (Low to high)</div>
+                        <div>Price (High to low)</div>
+                        <div>Ratings</div>
+                        <div style="border-bottom-right-radius:10px; border-bottom-left-radius: 10px;">Discounts</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter_funnel"><button id="filter_img"><img src="{% static '/imgs/filter.svg' %}" alt=""></button>Filter</div>
+            <div class="contents">
+                
+                <div class="filters" id="filters">
+                   
+                    <div class="filterhead">
+                        <div>Categories</div>
+                        <span class="arrow_icon"><img src="{% static '/imgs/uparrow.svg' %}" alt="arrow"/></span>
+                    </div>
+                    <div class="filteroptions">
+                        {% for i in categories %}
+                        <label><input type="checkbox"><span>{{i.name}}</span></label>
+                        {% endfor %}
+                       
+                    </div>
+
+                    <div class="filterhead">
+                        <div>Brand</div>
+                        <span class="arrow_icon"><img src="{% static '/imgs/uparrow.svg' %}" alt="arrow"/></span>
+                    </div>
+                    <div class="filteroptions">
+                        {% for i in brands %}
+                        <label><input type="checkbox"><span>{{i.name}}</span></label>
+                        {% endfor %}
+                        <!-- <label><input type="checkbox"><span>Casio </span></label> 
+                        <label><input type="checkbox"><span>Samsung</span></label> 
+                        <label><input type="checkbox"><span>Fossil</span></label>
+                        <label><input type="checkbox"><span>Sonata</span></label>
+                        <label><input type="checkbox"><span>Titan</span></label>  -->
+                    </div>
+                    {% if item == 'Watch' %}
+                    <div class="filterhead">
+                        <div>Dial shape</div>
+                        <span class="arrow_icon"><img src="{% static '/imgs/uparrow.svg' %}" alt="arrow"/></span>
+                    </div>
+                    
+                    <div class="filteroptions">
+                        <label><input type="checkbox"><span>Circle</span></label>
+                        <label><input type="checkbox"><span>Oval</span></label> 
+                        <label><input type="checkbox"><span>Rectangle</span></label> 
+                        <label><input type="checkbox"><span>Square</span></label> 
+                    </div>
+                    {% endif %}
+
+                    <div class="filterhead">
+                        <div>Discount</div>
+                        <span class="arrow_icon"><img src="{% static '/imgs/uparrow.svg' %}" alt="arrow"/></span>
+                    </div>
+                    <div class="filteroptions">
+                        <label><input type="checkbox"><span>90% and more</span></label>
+                        <label><input type="checkbox"><span>80% and more</span></label> 
+                        <label><input type="checkbox"><span>70% and more</span></label> 
+                        <label><input type="checkbox"><span>60% and more</span></label> 
+                    </div>
+                </div>
+                <div style="position: relative; z-index: -5;">
+                    <div id="choices">
+                        <span id="clear" onclick="clearAll()">Clear All</span>
+                    </div>
+
+                    <div class="products_container">
+
+
+                        {% for item in product %}
+                            <div class="watchbox">
+                                <div class="img_box">
+                                    
+                                    <a href="" class="like">{{item.id}}</a>
+                                    <!-- <a class="like"><img src="{% static '/imgs/like_inactive.svg' %}" alt="like"></a> -->
+                                    
+                                    <a href="{% url 'singlepage' item.id %}">
+                                    <div class="watch"><img src="/media/{{item.image}}" alt="watch({{item.name}})"></div>
+                                </div>
+
+                                <div>
+                                    <div class="line1">{{item.name}}</div>
+                                    <div class="line2">{{item.caption}}</div>
+                                    <div class="line3">
+                                        <span id="selling">Rs.{{item.discount_price|floatformat:0}} </span>
+                                        {% if item.discount %}
+                                        <span id="original">Rs.{{item.original_price|floatformat:0}}</span>
+                                        <span id="offer"> {{item.discount}}% Offer</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </a>
+                            </div>
+                            <script>
+                                category = "{{item.category.category_name}}"
+                            </script>
+                        {% endfor %}
+                        
+                        
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+<script src="{% static '/js/search_script.js' %}"></script>
+
+<script>
+    
+    function search(){
+        var input = document.getElementById('search').value;
+        if(input){
+            var url = "{% url 'search' 'placeholder' %}".replace('placeholder', input);
+            window.location.href = url;
+        }
+    }
+//var like = document.querySelectorAll('.like')
+//console.log(category)
+like.forEach(element=>{
+    var match = false
+    var text = element.innerText;
+    //console.log(text)
+    var img = document.createElement('img');
+    for(i=0;i<wishlist.length;i++){
+        
+        
+        if(element.innerText==wishlist[i]){
+            match = true;
+            // img.src = like_active
+            // element.appendChild(img);
+        }
+    }
+    if(match)
+        img.setAttribute('src',like_active)        
+    else{
+        img.setAttribute('src',like_inactive)
+        
+    }
+    var url = "{% url 'add_item' 'placeholder' 'category' %}".replace('placeholder',text);
+    url = url.replace('category',category)
+    element.setAttribute('href',url);
+
+    element.appendChild(img);
+    element.firstChild.remove();
+});
+</script>
+</html>

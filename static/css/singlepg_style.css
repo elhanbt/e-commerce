@@ -1,0 +1,316 @@
+@font-face{
+    font-family: "Montserrat-regular";
+    src: url("assets2/fonts/woff_woff2/Montserrat-Regular.woff") format('woff'),
+    url("assets2/fonts/woff_woff2/Montserrat-Regular.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Montserrat-semibold";
+    src: url("assets2/fonts/woff_woff2/Montserrat-SemiBold.woff") format('woff'),
+    url("assets2/fonts/woff_woff2/Montserrat-SemiBold.woff2") format('woff2');
+}
+@font-face{
+    font-family: "Montserrat-medium";
+    src: url("assets2/fonts/woff_woff2/Montserrat-Medium.woff") format('woff'),
+    url("assets2/fonts/woff_woff2/Montserrat-Medium.woff2") format('woff2');
+}
+
+body{
+    margin: 0;
+    font-family: 'Montserrat-regular';
+   
+}
+img{
+    display: block;
+    width: 100%;
+}
+
+div.section_wrapper{
+    font-family: 'Montserrat-regular';
+    margin-top: 5%;
+    position: relative;
+}
+
+div.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+    background-color:#FFFFFFCC;
+    
+}
+
+div.logo_searchbar{
+    display: flex;
+    gap:5%;
+    align-items: center;
+
+}
+div.logo_searchbar > h1{
+    margin: 0px;
+    width: 40px;
+}
+div.search{
+    border: solid 1px #f4e7e7;
+    display: flex;
+    padding: 2%;
+    border-radius: 10px;
+    width: 70%;
+    background-color: white;
+}
+div.search > span{
+    display: inline-block;
+    width: 25px;
+}
+div.search > input{
+    background-color: inherit;
+    border: none;
+    font-size: 13pt;
+    padding: 0px;
+    margin-left: 10px;
+    width: inherit;
+    
+}
+div.search > input:focus{
+    outline: none;
+}
+
+div.links{
+    gap: 70px;
+}
+
+div.links > a{
+    display: inline-flex;
+    font-size: 12pt;
+    color: #7B7B75;
+    cursor: pointer;
+    text-decoration: none;
+}
+div.links > a > span{
+    margin-right: 5px;
+    width: 20px;
+}
+div.dropdown{
+    position: fixed;
+    right: 10%;
+    background-color: #FCFCFC;
+    border-radius: 15px;
+    padding: 20px;
+    display: none;
+    
+}
+a{
+    text-decoration: none;
+}
+a.dropdown_content{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 0.5px #EDEDED;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 15px;
+    color: #7B7B75;
+    font-size: 11pt;
+}
+a.dropdown_content:hover{
+    background-color: #e3e3dc;
+}
+span.dropdown_icons{
+    width: 20px;
+    margin-right: 10px;
+}
+#dropdownwrapper{
+    position: fixed;
+    left: 0;
+    z-index: 100; 
+    background-color: #0000001A; 
+    width: 100%; 
+    height: 100%;
+    display: none;
+}
+.dropdown2{
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 10%;
+    background-color: #FCFCFC;
+    border-radius: 15px;
+    padding: 20px;
+}
+.dropdown2 > a{
+    display: flex;
+    border-bottom: solid 0.5px #EDEDED;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 15px;
+    color: #7B7B75;
+    font-size: 11pt;
+    
+}
+
+
+div.box1{
+    padding: 20px;
+    background-color: #FAFAFA;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+div.box2{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #7B7B75;
+    font-size: 13pt;
+    border: solid #EDEDED 0.5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+input{
+    border: none;
+    background-color: transparent;
+    border-bottom: solid 1px #EDEDED;
+    padding: 5px;
+    font-size: 12pt;
+    color: #7B7B75;
+}
+input:focus{
+    outline: none;
+}
+::placeholder{
+    font-family: 'Montserrat-regular';
+    color: #A7A7A2;
+}
+div.box3{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: solid #EDEDED 0.5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+li{
+    color: #7B7B75;
+    font-size: 13pt;
+    margin-bottom: 10px;
+}
+li::marker{
+    color: #DFDFD6;
+}
+
+div.box4{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: solid #EDEDED 0.5px;
+    border-radius: 10px;
+}
+div.title{
+    font-size: 14pt;
+    color: #7B7B75;
+    width: 30%;
+
+}
+div.property{
+    font-size: 14pt;
+    font-family: 'Montserrat-medium';
+    color: #2D2D2C;
+    width: 60%;
+}
+
+#watch_big{ 
+    margin: 0 auto;
+    border: solid #EDEDED 0.5px;
+    border-radius: 10px;
+    padding:10%;
+    margin-bottom: 10px;
+}
+div.img_list{
+    display: flex;
+    justify-content: space-between;
+}
+div.img_list > span{
+    padding: 10px;
+    border: 1px solid #DFDFD6;
+    border-radius: 10px;
+    width: 90px;
+    cursor: pointer;
+}
+
+div.button_container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+}
+.buttons{
+    display: inline-block;
+    border:  solid 1px #DAB803;
+    padding: 20px 30px;
+    width: 35%;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16pt;
+    font-family: 'Montserrat-medium';
+}
+.buttons > span{
+    display: inline-block;
+    width: 20px;
+}
+
+
+#original{
+    text-decoration: line-through;
+    font-family: 'Montserrat-medium';
+    font-size: 11pt;
+    color: #7B7B75;
+}
+#offer{
+    font-size: 11pt;
+    color: #A98F02;
+    font-family: 'Montserrat-medium';
+}
+
+div.starcontainer{
+    display: flex;
+}
+div.star_container > span{
+    width: 20px;
+}
+
+
+@media (max-width:1024px){
+    .links{display: none;}
+    .logo_searchbar{width: 100%;}
+    .header{padding:20px 10%;}
+    .section_wrapper{padding: 0px 5% 25px 5%;}
+    .dropdown{width: fit-content;top: 15vw;}
+    .dropdown2{top:15vw}
+}
+@media (min-width:1024px){
+    .links{display: flex;}
+    .menu{display: none;}
+    .logo_searchbar{width: 50%;}
+    .header{padding: 20px 10%;}
+    .section_wrapper{padding: 0px 10% 25px 10%; display: flex; gap: 20px;}
+    .dropdown{width: 15%;top: 60px;}
+    #left{width: 40%;}
+    #right{width: 60%;}
+}
+
+@media (max-width:475px){
+    .dropdown{top: 15vw;}
+}
+@media (min-width:475px) and (max-width:1024px){
+    .dropdown{top: 70px}
+    .dropdown2{top:70px}
+}

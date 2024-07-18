@@ -1,0 +1,87 @@
+{% load static %}
+<html>
+<head>
+    <title>Sample</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    
+</head>
+<body>
+    
+
+   
+
+
+     <div class="scrolling_imgs">
+        {% for product in instances %}
+        {{product.dialshape.shape}}
+        <div class="img_txt_container">
+            <span><img class="like_icon" src="{% static '/imgs/like_icon.svg' %}" alt="like"></span>
+            <div class="img_container2"><img src="/media/{{product.image}}" alt="ikea furniture"/></div>
+            <div class="img_caption2">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="color: #41413F;font-size: 14pt;font-family: 'Montserrat-medium';">{{product.name}}</span>
+                    
+                    <!-- <script>makeStars ({{product.rating}}) </script> -->
+                    <div style="display: flex;" class="star_container" id="stars_{{ forloop.counter}}">
+                        
+                    </div>
+                    
+                </div>
+                <span  style="font-size: 11pt; color: #7B7B75;"><span class="rating">{{product.rating}}</span> Star rating from user's</span><br/>
+                <span style="color: #DFDFD6;font-size: 10pt;">{{product.caption}}</span>
+            </div>
+        </div>
+
+        
+        {% endfor %}
+    </div>
+
+    {% for i in instances %}
+    {{i.category_id}}
+    {% endfor %}
+
+</body>
+
+<script>
+    
+    starfull = "{% static '/imgs/star_full.svg' %}";
+    starhalf = "{% static '/imgs/star_half.svg' %}";
+    starnone = "{% static '/imgs/star_none.svg' %}";
+    
+    var ratings = document.querySelectorAll('.rating');
+    
+    ratings.forEach(function(element, index){
+        var rating = parseFloat(element.innerHTML);
+        star_container = document.getElementById('stars_' + (index+1)); 
+
+        makeStars(star_container, rating, starfull, starfull, starnone)
+    });
+    
+    function makeStars(star_container, rating,  starfull, starhalf, starnone){
+        var i;
+               
+        for(i=0;i<5;i++){
+            var span = document.createElement('span');
+            var img = document.createElement('img');
+            if(rating>=1){
+                img.src = starfull;
+                 
+                --rating;
+            }       
+            else if(rating>=0.5){
+                img.src = "{% static '/imgs/star_half.svg' %}";
+                console.log(rating);
+                rating-=0.5;
+            }  
+            else{
+                img.src = starnone;
+            }
+            
+            span.appendChild(img);
+            star_container.appendChild(span);
+        }
+       
+    }
+    
+</script>
+</html>

@@ -1,0 +1,224 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Wishlist</title>
+    <link rel="icon" href="{% static '/imgs/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/wishlist_style.css' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <style>
+        @font-face{
+            font-family: "Montserrat-semibold";
+            src: url("{% static '/fonts/Montserrat-SemiBold.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-SemiBold.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: "Montserrat-medium";
+            src: url("{% static '/fonts/Montserrat-Medium.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-Medium.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: 'Montserrat-regular';
+            src: url("{% static '/fonts/Montserrat-Regular.woff' %}"), format('woff'),
+            url("{% static '/fonts/Montserrat-Regular.woff2' %}"), format('woff2')
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="wrapper">
+        
+        <div id="dropdownwrapper">
+
+            <div class="dropdown2" id="drop2">
+                <a href="">
+                    <span><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></span>
+                    Wishlist
+                </a>
+                <a href="{% url 'cart' %}">
+                    <span><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></span>
+                    Cart
+                </a>
+                <a style="align-items: center;" onclick="dropdown('1')">
+                    <span><img src="{% static '/imgs/account.svg' %}" alt="account icon"></span>
+                    Elhan B Thomas
+                    <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+                </a >
+            </div>
+    
+
+            <div class="dropdown" id="drop1">
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/account.svg' %}" alt="accounticon"></span> <span> Profile</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/truck_icon.svg' %}" alt="truck icon"></span> <span> My address</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/cart.svg' %}" alt="acart icon"></span> <span> My orders</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/notification_icon.svg' %}" alt="notification icon"></span> <span>Notification</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href="{% url 'login' %}"  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/logout_icon.svg' %}" alt="logout icon"></span> <span>Logout</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+            </div>
+
+<!--delete modal-->
+            <div id="delete_modal">
+                <div style="color: #2D2D2C; font-family:'Montserrat-medium'; font-size:17pt">Remove item</div>
+                <div style="color:#7B7B75; font-size:14pt; margin-top:20px">Are you sure want to remove this item?</div>
+                <div style="margin-top: 30px;text-align:right">
+                    <span id="cancel_button">Cancel</span>
+                    <a href="{% url 'delete_item' 'hello' %}" id="remove_button">Remove</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="header">
+            
+        <!--header left part-->
+        <div class="logo_searchbar">
+            <h1><a href="{% url 'index' %}"><img src="{% static '/imgs/logo.svg' %}" alt="logo"/></a></h1>        <!--LOGO-->
+            <div class="search">
+                <span  onclick="search()" style="cursor: pointer;"><img src="{% static '/imgs/search.svg' %}" alt="search icon"/></span>
+                <input type="text" id="search" name="search" placeholder="Search products">
+            </div>
+        </div>
+
+        <!--header right part-->
+        <div class="links">
+            <div>
+                <a href="{% url 'wishlist' %}"><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></a>
+               
+            
+            
+                <a href="{% url 'cart' %}"><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></a>
+               
+            </div>
+            <div style="align-items: center;" onclick="dropdown('1')">
+                <span><img src="{% static '/imgs/account.svg' %}" alt="account icon"></span>
+                {{request.user.first_name}}
+                <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+            </div>
+
+        </div>
+        <div class="menu" onclick="dropdown('2')" id="menu">
+            <img src="{% static '/imgs/menu.svg' %}" alt="menu button"/>
+        </div>
+        </div>
+
+        <div class="section_wrapper">
+
+            <div class="title_search">
+                <div>
+                    <span style="font-family:'Montserrat-medium'; font-size: 18pt;color: #41413F;">Wishlist</span> 
+                    <span style="font-size:16pt; color:#7B7B75">({{count}} products)</span>
+                </div>
+
+                <div class="wishlist_search">
+                    <input type="text" name="wishlist_search" placeholder="Search your wishlist products here...">
+                    <div class="search_button">Search</div>
+                </div>
+            </div>
+
+            <div class="wishlist_container">
+                {% for item in wishlist %}
+                
+                <div class="product_container">
+                    <a href="{% url 'singlepage' item.product.id %}" style="width: 45%;"><img src="/media/{{item.product.image}}" alt="titan"></a>
+                    <div style="width: 50%;">
+                        <div class="name">{{item.product.name}}<span class="delete" onclick="removeProduct('{{item.id}}')"><img src="{% static 'imgs/delete_icon.svg' %}" alt=""></span></div>
+                        <div class="caption">{{item.product.caption}}</div>
+                        <div style="margin-top: 10px;font-family:'Montserrat-medium';">
+                            <span class="price">Rs.{{item.product.discount_price|floatformat:0}}</span>
+                            {% if item.product.discount %} 
+                            <span class="original">Rs.{{item.product.original_price|floatformat:0}}</span>
+                            <span class="offer"> {{item.product.discount}}% Offer</span>
+                            {% endif %}
+                        </div>
+                        <div style="display: flex;gap:10px;margin-top:50px">
+                            <a href="{% url 'addtocart' item.product.id 'wishlist' %}" class="cart"><img src="{% static 'imgs/cart2.svg' %}" alt="cart icon"></a>
+                            <div class="buy_now">Buy now</div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+<script>
+    var drop = document.getElementById('dropdownwrapper');
+    var dropdown1 = document.getElementById('drop1');
+    var dropdown2 = document.getElementById('drop2');
+
+function dropdown(box){
+    drop.style.display = 'block';
+
+    if(box === '2'){
+        dropdown2 .style.display = "flex";
+        dropdown1.style.display = "none";
+     }
+    
+    else if(box === '1'){
+        dropdown1.style.display = "block";
+        dropdown2.style.display = "none";      
+    }
+   
+    
+}
+
+var delete_wishlist = document.querySelectorAll('.delete');
+var delete_modal = document.getElementById('delete_modal');
+
+delete_wishlist.forEach(product =>{
+    product.addEventListener('click', ()=>{
+        drop.style.display = 'block';
+        delete_modal.style.display = 'block';
+    });
+}); 
+
+
+drop.addEventListener('click', function(event){
+    if(!dropdown2.contains(event.target) && !delete_modal.contains(event.target) ){
+        drop.style.display = 'none';
+        drop1.style.display = 'none';
+        delete_modal.style.display = 'none'
+    }
+});
+
+var remove = document.getElementById('remove_button')
+
+function removeProduct(val){
+    console.log(val)
+    var url = "{% url 'delete_item' 'placeholder' %}".replace('placeholder',String(val));
+    remove.setAttribute('href',url)
+}
+
+function search(){
+    var input = document.getElementById('search').value;
+    if(input){
+        var url = "{% url 'search' 'placeholder' %}".replace('placeholder', input);
+        window.location.href = url;
+    }
+}
+
+</script>
+
+</html>

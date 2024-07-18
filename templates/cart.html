@@ -1,0 +1,195 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Cart</title>
+    <link rel="icon" href="{% static '/imgs/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/cart_style.css' %}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <style>
+        @font-face{
+            font-family: "Montserrat-semibold";
+            src: url("{% static '/fonts/Montserrat-SemiBold.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-SemiBold.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: "Montserrat-medium";
+            src: url("{% static '/fonts/Montserrat-Medium.woff' %}") format('woff'),
+            url("{% static '/fonts/Montserrat-Medium.woff2' %}") format('woff2');
+        }
+        @font-face{
+            font-family: 'Montserrat-regular';
+            src: url("{% static '/fonts/Montserrat-Regular.woff' %}"), format('woff'),
+            url("{% static '/fonts/Montserrat-Regular.woff2' %}"), format('woff2')
+        }
+    </style>
+    <script>
+        var N = parseInt('{{count}}')
+    </script>
+</head>
+<body>
+    
+    <div class="wrapper">
+        
+        <div id="dropdownwrapper">
+
+            <div class="dropdown2" id="drop2">
+                <a href="">
+                    <span><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></span>
+                    Wishlist
+                </a>
+                <a href="">
+                    <span><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></span>
+                    Cart
+                </a>
+                <a style="align-items: center;" onclick="dropdown('1')">
+                    <span><img src="{% static '/imgs/account.svg' %}" alt="account icon"></span>
+                    {{request.user.first_name}}
+                    <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+                </a >
+            </div>
+    
+
+            <div class="dropdown" id="drop1">
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/account.svg' %}" alt="accounticon"></span> <span> Profile</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/truck_icon.svg' %}" alt="truck icon"></span> <span> My address</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/cart.svg' %}" alt="acart icon"></span> <span> My orders</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href=""  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/notification_icon.svg' %}" alt="notification icon"></span> <span>Notification</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+    
+                <a href="{% url 'login' %}"  class="dropdown_content">
+                    <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/logout_icon.svg' %}" alt="logout icon"></span> <span>Logout</span></div>
+                    <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="header">
+            
+        <!--header left part-->
+        <div class="logo_searchbar">
+            <h1><a href="{% url 'index' %}"><img src="{% static '/imgs/logo.svg' %}" alt="logo"/></a></h1>        <!--LOGO-->
+            <div class="search">
+                <span><img src="{% static '/imgs/search.svg' %}" alt="search icon"/></span>
+                <input type="text" name="search" placeholder="Search products">
+            </div>
+        </div>
+
+        <!--header right part-->
+        <div class="links">
+            <div>
+                <a href="{% url 'wishlist' %}"><img src="{% static '/imgs/wishlist.svg' %}" alt="wishlist icon"/></a>
+               
+            
+            
+                <a href="{% url 'cart' %}"><img src="{% static '/imgs/cart.svg' %}" alt="cart icon"/></a>
+               
+            </div>
+            <div style="align-items: center;" onclick="dropdown('1')">
+                <a><img src="{% static '/imgs/account.svg' %}" alt="account icon"></a>
+                {{request.user.first_name}}
+                <span style="margin-left: 10px;margin-right: 0px; width: 15px;"><img src="{% static '/imgs/dropdown_arrow.svg' %}" alt="dropdown arroe"></span>
+            </div>
+
+        </div>
+        <div class="menu" onclick="dropdown('2')" id="menu">
+            <img src="{% static '/imgs/menu.svg' %}" alt="menu button"/>
+        </div>
+        </div>
+
+        <div class="section_wrapper"> 
+           
+            
+            <div style="font-family:'Montserrat-medium'; font-size: 18pt;color: #41413F;">Cart</div>
+
+            <!--customer address-->
+            <div class="addressbox">
+                <div>Delivered to - <span style="font-family: 'Montserrat-medium' ;">Avinashi</span>(Tirupur) - <span style="font-family: 'Montserrat-medium';">641 654</span></div>
+                <a href="" style="color: #FFD700; font-family:'Montserrat-medium';">Change</a>
+            </div>
+
+            <!--Main section-->
+            <div class="productandprice">
+                
+                <div class="products">
+                    {% for item in products %}
+
+                    <div class="productcontainer">
+        
+                        <div class="imageandcount">
+                            <div id="image"><img src="/media/{{item.product.image}}" alt="{{item.product.name}}"/></div>
+                            <div id="itemcount">
+                                <div  onclick="change('-','{{forloop.counter}}')" style="cursor: pointer;">-</div>
+                                <div id="count_{{forloop.counter}}">1</div>
+                                <div onclick="change('+', '{{forloop.counter}}')" style="cursor: pointer;">+</div>
+                            </div>
+                        </div>
+                        
+                        <div class="product_description">
+                            <div style="display: flex; justify-content: space-between;color: #41413F;font-family: 'Montserrat-medium'; font-size: 15pt;">
+                                <span>{{item.product.name}}</span> 
+                                <span>Rs.<span class="product_price" id="product_price_{{forloop.counter}}">{{item.product.original_price|floatformat:0}}</span></span>
+                            </div>
+                        
+                        <div style="display: flex; flex-direction: column; font-size: 11pt; color: #7B7B75; gap: 1vw;">
+                            <span>{{item.product.caption}}</span>
+                            
+                            <span>362 Ratings</span>
+                            <span style="display: none;" class="discount_price" id="discount_price_{{forloop.counter}}">{{item.product.discount_price}}</span>
+                            {% if item.product.discount %}
+                            <span style="color: #FFD700;">{{item.product.discount}}% Offer</span>
+                            {% endif %}
+                            <span>Delivery by Wed April, 12 | <strike>Rs.160</strike> <span style="color: #4EAB2D;">Free</span>
+                        </div>
+
+                        <div class="buttons">
+                            <a href="{% url 'add_item' item.product.id 'cart' %}" style="color: #7B7B75;">Add to wishlist</a> <a href="{% url 'removefromcart' item.id %}" style="color: #FFD700;">Save for later</a>
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="price_container">
+                <div class="price">
+                        <div style="font-family: 'Montserrat-medium'; color: #41413F; font-size: 15pt; border-bottom: 0.5px solid #EDEDED; padding-bottom: 10px;">Price details</div>
+                        <div class="pricedetails">
+                            <div><span>Total price</span> <span class="cost">Rs.<span  id="itemprice"></span></span></div>
+                            <div><span>Discount on price</span> <span class="cost">Rs.<span id="discount"></span></span></div>
+                            <div><span>Coupon discount</span> <span style="color: #DAB803; cursor: pointer;">Apply coupon</span></div>
+                            <div><span>Delivery charges</span> <span style="color: #4EAB2D;"><span style="text-decoration: line-through; color:#7B7B75; font-family: 'Montserrat-medium';">Rs.199</span> Free</span></div>
+                            <div><span>Packaging charges</span> <span class="cost">Rs.49</span></div>
+                        </div>
+                        <div style="display: flex;justify-content: space-between; font-family: 'Montserrat-medium'; color: #41413F; font-size: 15pt; border-top: 0.5px solid #EDEDED; padding-top: 10px;">
+                            <span>Total payable</span>
+                            <span id="total"></span>
+                        </div>
+                </div>
+
+                    <button class="placeorder">Place order</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script src="{% static '/js/cart_script.js' %}"></script>
+
+</html>
+

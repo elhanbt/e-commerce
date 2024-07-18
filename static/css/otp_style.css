@@ -1,0 +1,90 @@
+@font-face{
+    font-family: "Montserrat-regular";
+    src: url("Assets/fonts/woff_woff2/Montserrat-Regular.woff") format('woff'),
+    url("Assets/fonts/woff_woff2/Montserrat-Regular.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Montserrat-semibold";
+    src: url("Assets/fonts/woff_woff2/Montserrat-SemiBold.woff") format('woff'),
+    url("Assets/fonts/woff_woff2/Montserrat-SemiBold.woff2") format('woff2');
+}
+@font-face{
+    font-family: "Montserrat-medium";
+    src: url("Assets/fonts/woff_woff2/Montserrat-Medium.woff") format('woff'),
+    url("Assets/fonts/woff_woff2/Montserrat-Medium.woff2") format('woff2');
+}
+
+.wrapper{
+    align-items: center;
+    font-family: 'Montserrat-regular';
+    gap: 60px;
+}
+img{
+    display: block;
+    width: 100%;
+}
+div.cart{
+    width: 60%;
+}
+div.otp_box{
+    width: 60%;
+    box-shadow: 0px 8px 40px 0px #0000001A;
+    border: #EDEDED solid 1px;
+    border-radius: 15px;
+    padding: 20% 15%;
+    text-align: center;
+}
+input:focus{
+    outline: none;
+}
+input{
+    background-color: transparent;
+    border: solid 1px #DFDFD6;
+    border-radius: 10px;
+}
+div#inputcontainer{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.input{
+    width: 20%;
+    text-align: center;
+    padding: 10px;
+    font-size: 16pt;
+    font-family: 'Montserrat-medium';
+    color: #41413F;
+}
+#submit{
+    width: 100%;
+    margin-top: 60px;
+    background-color: #7B7B75;
+    color: white;
+    font-family: 'Montserrat-semibold';
+    font-size: 13pt;
+    cursor: pointer;
+    padding: 20px 0px;
+    border: solid 1px #DFDFD6;
+    border-radius: 10px;
+}
+.error{
+    margin-top: 20px;
+    color: red;
+    font-size: 10pt;
+    display: inline-block;
+}
+
+@media screen and (max-width:1024px) {
+    .cart{display: none;}
+    .wrapper{padding: 100px 0;}
+    .otp_box{margin: 0 auto;}
+    .input{padding: 10px;}
+}
+@media screen and (min-width:1024px){
+    .wrapper{gap: 60px; padding: 100px 15%; display:flex}
+    .input{padding: 15px;}
+}
