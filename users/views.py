@@ -139,10 +139,14 @@ def addWishlist(request, value, category):
 # @renderer_classes([TemplateHTMLRenderer])
 def cart(request):
     cart_items = UserCart.objects.filter(userprofile__username = request.user.username)
+    address = UserAddress.objects.get(userprofile__user = request.user, isDefault = True)
     
     context = {
         'products':cart_items,
         'count':len(cart_items),
+        'name':address.name,
+        'city':address.city,
+        'pin':address.pin_code
     }
     return render(request, 'cart.html', context=context)  
 
@@ -177,6 +181,7 @@ def userAddress(request):
         state = request.POST.get('state')
         landmark = request.POST.get('landmark')
         type = request.POST.get('type')
+        id = request.POST.get('id', None)
         
         if UserAddress.objects.filter(userprofile__user = request.user, isDefault = True).exists():
             isDefault = False
@@ -187,8 +192,9 @@ def userAddress(request):
         
         address, created =  UserAddress.objects.get_or_create(
             userprofile_id = user_id.id,
-            name = name,
-            type = type,
+            
+            id = id,
+            # type = type,
             defaults={
                 'address':address_line,
                 'phone':phone,
@@ -198,6 +204,8 @@ def userAddress(request):
                 'state':state,
                 'landmark':landmark,
                 'isDefault':isDefault,
+                'name' : name,
+                'type': type
             }    
         )
         if not created:
@@ -227,4 +235,16 @@ def deleteAddress(request, id):
     address = UserAddress.objects.get(id = id)
     if address:
         address.delete()
+    addDefaultAddress(request)
     return redirect('address')
+
+
+def addDefaultAddress(request):
+    address = UserAddress.objects.filter(userprofile__user = request.user, isDefault = True).exists()
+    addresses = UserAddress.objects.filter(userprofile__user = request.user).first()
+    
+    if not address:
+        addresses.isDefault = True
+        addresses.save()
+    else:
+        print('hii')

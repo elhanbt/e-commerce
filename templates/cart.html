@@ -56,7 +56,7 @@
                     <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
                 </a>
     
-                <a href=""  class="dropdown_content">
+                <a href="{% url 'address' %}"  class="dropdown_content">
                     <div style="display: flex;"><span class="dropdown_icons"><img src="{% static '/imgs/truck_icon.svg' %}" alt="truck icon"></span> <span> My address</span></div>
                     <span class="dropdown_icons"><img src="{% static '/imgs/angular_bracket.svg' %}" alt="arrow"></span>
                 </a>
@@ -119,7 +119,7 @@
 
             <!--customer address-->
             <div class="addressbox">
-                <div>Delivered to - <span style="font-family: 'Montserrat-medium' ;">Avinashi</span>(Tirupur) - <span style="font-family: 'Montserrat-medium';">641 654</span></div>
+                <div>Delivered to - <span style="font-family: 'Montserrat-medium' ;">{{name}}</span>({{city}}) - <span style="font-family: 'Montserrat-medium';">{{pin}}</span></div>
                 <a href="" style="color: #FFD700; font-family:'Montserrat-medium';">Change</a>
             </div>
 
